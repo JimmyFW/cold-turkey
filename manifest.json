@@ -4,7 +4,9 @@
   "description": "Curb your uncontrollable YouTube addiction",
   "version": "1.0",
   "browser_action": {
-    "default_icon": "turkey.png"
+    "default_icon": "turkey.png",
+    "default_title": "Cold Turkey",
+    "default_popup": "popup.html"
   },
   "content_scripts": [
     {
