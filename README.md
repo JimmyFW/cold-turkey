@@ -9,8 +9,6 @@ Currently, this Chrome extension disables the content feed and search results, p
 ![Screenshot](https://raw.githubusercontent.com/JimmyFW/cold-turkey/master/screenv2.png)
 
 Upcoming high-level features
-- Analytics
-- Reasons
 
 #### Analytics
 Record when I visit YouTube, how long I spend per session
