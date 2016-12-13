@@ -12,10 +12,10 @@ Upcoming high-level features
 - Analytics
 - Reasons
 
-Analytics
+#### Analytics
 Record when I visit YouTube, how long I spend per session
 
-Reasons
+#### Reasons
 I tend to quickly forget the reason why I came to YouTube in the first place. I want to be able to write down my original purpose for visiting the site.
 
 - [x] Reason entry and storage
