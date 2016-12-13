@@ -1,6 +1,7 @@
 # cold-turkey
 
-Removes the content pane in YouTube. Prevents YouTube users from entering the death spiral of endless video watching.
+I'm running an experiment to change my browsing behavior on YouTube. Currently, this Chrome extension disables the content feed and search results, puts this functionality behind a toggle, and asks me to input my reasons for coming to YouTube.
+
 ![Screenshot](https://raw.githubusercontent.com/JimmyFW/cold-turkey/master/screenv2.png)
 
 Upcoming high-level features
