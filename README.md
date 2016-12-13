@@ -1,6 +1,6 @@
 # YouTube behavior experiment
 
-I'm running an experiment to change my browsing behavior on YouTube. Currently, this Chrome extension disables the content feed and search results, puts this functionality behind a toggle, and asks me to input my reasons for coming to YouTube.
+YouTube has made it too easy for me to enter the unending spiral of video-watching. I'm running an experiment to change my browsing behavior. Currently, this Chrome extension disables the content feed and search results, puts this functionality behind a toggle, and asks me to input my reasons for coming to YouTube.
 
 ![Screenshot](https://raw.githubusercontent.com/JimmyFW/cold-turkey/master/screenv2.png)
 
@@ -17,3 +17,5 @@ I tend to quickly forget the reason why I came to YouTube in the first place. I 
 - [x] Reason entry and storage
 - [ ] Specify expected length of time to be spent on the site
 - [ ] Require user to enter a reason in order to turn off blocking?
+
+Backend: https://github.com/JimmyFW/withdrawal-log
