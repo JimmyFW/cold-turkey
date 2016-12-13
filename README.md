@@ -1,4 +1,4 @@
-# cold-turkey
+# YouTube behavior experiment
 
 I'm running an experiment to change my browsing behavior on YouTube. Currently, this Chrome extension disables the content feed and search results, puts this functionality behind a toggle, and asks me to input my reasons for coming to YouTube.
 
