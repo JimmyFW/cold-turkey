@@ -1,4 +1,4 @@
-# YouTube behavior experiment
+# "Reasons" - a YouTube behavior experiment
 
 YouTube has made it too easy for me to enter the unending spiral of video-watching. I'm running an experiment to change my browsing behavior. Currently, this Chrome extension disables the content feed and search results, puts this functionality behind a toggle, and asks me to input my reasons for coming to YouTube.
 
