@@ -15,6 +15,7 @@
         "http://www.youtube.com/*"
       ],
       "js": [
+        "secret.js",
         "app.js"
       ]
     }
@@ -23,7 +24,7 @@
     "storage",
     "activeTab",
     "tabs",
-    "storage",
-    "identity"
+    "history",
+    "*://withdrawal-log.herokuapp.com/*"
   ]
 }
