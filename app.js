@@ -1,12 +1,19 @@
-// Reference: http://stackoverflow.com/questions/23339944/remember-state-chrome-extension
+/*
+thecreatives2016@gmail.com
+http://www.forbes.com/forbes/welcome/?toURL=http://www.forbes.com/sites/learnvest/2013/03/04/8-mistakes-you-should-never-make-on-linkedin/&refURL=https://duckduckgo.com/&referrer=https://duckduckgo.com/// Reference: http://stackoverflow.com/questions/23339944/remember-state-chrome-extension
+*/
 
-var blockId = window.setInterval(blockAndDisplay, 10);
-chrome.storage.local.get('toggle', function(data) {
-	if (data.toggle === false) {
+chrome.runtime.sendMessage({requestFreedom: true}, function(res) {
+	var freedom = res.freedom;
+	console.log(freedom);
+	if (freedom === null) {
+		alert('freedom not set');
+	} else if (freedom == "false") {
 		console.log("Allow content");
-		window.clearInterval(blockId);
+		//window.clearInterval(blockId);
 	} else {
 		console.log("Block content!");
+		blockId = window.setInterval(blockAndDisplay, 10);
 	}
 });
 

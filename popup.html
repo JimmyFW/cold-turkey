@@ -4,16 +4,23 @@
 #wrapper {
 	width: 100px;
 }
+
+
 </style>
 </head>
 <body>
+
+<script src="libs/d3/d3.js"></script>
+<script src="popup.js"></script>
+
 <div id="wrapper">
 	<p>Toggle Freedom</p>
-	<span><input type="radio" name="cl-toggle" value="on" id="toggleon" /> Freedom</span><br />
-	<span><input type="radio" name="cl-toggle" value="off" id="toggleoff" /> Death Spiral</span>
+	<label class="switch" for="toggle">
+	  <input type="checkbox" id="toggle">
+	  <div class="slider"></div>
+	</label>
 </div>
 <div id="display"></div>
-<script src="popup.js"></script>
 
 </body>
 </html>
