@@ -1,11 +1,26 @@
-/*
-thecreatives2016@gmail.com
-http://www.forbes.com/forbes/welcome/?toURL=http://www.forbes.com/sites/learnvest/2013/03/04/8-mistakes-you-should-never-make-on-linkedin/&refURL=https://duckduckgo.com/&referrer=https://duckduckgo.com/// Reference: http://stackoverflow.com/questions/23339944/remember-state-chrome-extension
-*/
-
 chrome.runtime.sendMessage({requestFreedom: true}, function(res) {
-	var freedom = res.freedom;
-	console.log(freedom);
+	freedom = res.freedom;
+	blockIfFree();
+});
+
+document.getElementById('content').addEventListener('DOMSubtreeModified', blockOnDebouncedDOMEvents);
+
+function blockOnDebouncedDOMEvents() {
+	console.log("detected dom subtree modifiedcation");
+	var content = document.getElementById('content');
+	if (content != null) {
+		content.removeEventListener('DOMSubtreeModified', blockOnDebouncedDOMEvents);
+		setTimeout(function () {
+				blockIfFree();
+				var content = document.getElementById('content');
+				if (content != null) {
+					content.addEventListener('DOMSubtreeModified', blockOnDebouncedDOMEvents);
+				}
+			}, 500);
+	}
+}
+
+function blockIfFree() {
 	if (freedom === null) {
 		alert('freedom not set');
 	} else if (freedom == "false") {
@@ -13,14 +28,14 @@ chrome.runtime.sendMessage({requestFreedom: true}, function(res) {
 		//window.clearInterval(blockId);
 	} else {
 		console.log("Block content!");
-		blockId = window.setInterval(blockAndDisplay, 10);
+		blockAndDisplay();
+		//blockId = window.setInterval(blockAndDisplay, 10);
 	}
-});
+}
 
 function submitReason(event) {
-	console.log('submit reason ' + event.keyCode);
 	if (event.keyCode == 13) {
-
+		console.log('submit reason ' + event.keyCode);
 		console.log(this.value);
 		var http = new XMLHttpRequest();
 
@@ -37,17 +52,31 @@ function submitReason(event) {
 }
 
 function blockAndDisplay() {
+	var container = document.getElementById('page');
+
+	// remove the content pane if it exists
 	var content = document.getElementById('content');
-	if (content.getAttribute('role') != 'weed') {
-		content.innerHTML = "";
-		content.setAttribute('role', 'weed');
+	if (content != null) {
+		if (content.parentNode == container) {
+			container.removeChild(content);
+		} else {
+			console.log(content.parentNode);
+		}
+	}
+
+	// add the question pane if it hasn't been added yet
+	var maybeQuestion = document.getElementById('question');
+	if (maybeQuestion == null) {
+		var question = document.createElement('div');
+		question.setAttribute('id', 'question');
 		var textbox = document.createElement('input');
 		textbox.setAttribute('type', 'text');
 		textbox.setAttribute('name', 'reason');
 		textbox.onkeypress = submitReason;
-		var question = document.createTextNode("Why did you come to YouTube?  ");
-		content.appendChild(question);
-		content.appendChild(textbox);
+		var questionText = document.createTextNode("Why did you come to YouTube?  ");
+		question.appendChild(questionText);
+		question.appendChild(textbox);
+		container.appendChild(question);
 	}
 
 	var mastHead = document.getElementById('video-masthead-container');
