@@ -2,7 +2,8 @@
 
 Ever spend too much time on YouTube? Don't worry, it's only partially your fault. YouTube's design encourages you to watch as many videos as possible - for example, by enabling Autoplay by default, and by filling your screen with recommended content in the Up Next sidebar and Related Videos post-view gallery.
 
-![Cover image - Reasons](https://raw.githubusercontent.com/jwjimmy/cold-turkey/master/why.png =200x)
+
+<img src="https://raw.githubusercontent.com/jwjimmy/cold-turkey/master/why.png" height="200" width="200" >
 
 # Hypotheses
 
