@@ -8,6 +8,7 @@ Ever spend too much time on YouTube? Don't worry, it's only partially your fault
 
 The Freedom experiment tests two hypotheses about browsing behavior.
 
+![Cover image - Reasons](https://raw.githubusercontent.com/jwjimmy/cold-turkey/master/why.png)
 The Reasons hypothesis: After clicking through to related videos, users forget the reason why they came to YouTube in the first place. Users will consume less if they have to enter a reason before beginning a YouTube session, and if the reason comes up later in their session.
 
 The Metrics hypothesis: It is easier to binge-watch videos when you have no idea how long you've spent or how many videos you've watched. Displaying these metrics within the YouTube UI will help users calibrate their viewing habits to their own liking.
