@@ -76,31 +76,40 @@ function blockAndDisplay() {
 		}
 	}
 
+	// add the counter pane if it hasn't been added yet
 	var maybeCounter = document.getElementById('turkey-counter');
 	if (maybeCounter == null) {
-		var counterBox = document.createElement('div');
-		counterBox.setAttribute('id', 'turkey-counter');
-		container.appendChild(counterBox);
+		appendCounterPane(container);
 	}
 
 	// add the question pane if it hasn't been added yet
 	var maybeQuestion = document.getElementById('question');
 	if (maybeQuestion == null) {
-		var question = document.createElement('div');
-		question.setAttribute('id', 'question');
-		var textbox = document.createElement('input');
-		textbox.setAttribute('type', 'text');
-		textbox.setAttribute('name', 'reason');
-		textbox.onkeypress = submitReason;
-		var questionText = document.createTextNode("Why are you on YouTube?");
-		question.appendChild(questionText);
-		question.appendChild(textbox);
-
-		container.appendChild(question);
+		appendQuestionPane(container);
 	}
 
 	var mastHead = document.getElementById('video-masthead-container');
 	if (mastHead != null) {
 		mastHead.innerHTML = "";
 	}
+}
+
+function appendCounterPane(container) {
+	var counterBox = document.createElement('div');
+	counterBox.setAttribute('id', 'turkey-counter');
+	container.appendChild(counterBox);
+}
+
+function appendQuestionPane(container) {
+	var question = document.createElement('div');
+	question.setAttribute('id', 'question');
+	var textbox = document.createElement('input');
+	textbox.setAttribute('type', 'text');
+	textbox.setAttribute('name', 'reason');
+	textbox.onkeypress = submitReason;
+	var questionText = document.createTextNode("Why are you on YouTube?");
+	question.appendChild(questionText);
+	question.appendChild(textbox);
+
+	container.appendChild(question);
 }
