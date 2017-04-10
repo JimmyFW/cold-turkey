@@ -97,12 +97,15 @@ function blockAndDisplay() {
 function appendCounterPane(container) {
 	var counterBox = document.createElement('div');
 	counterBox.setAttribute('id', 'turkey-counter');
+	counterBox.setAttribute('style', 'margin: 20px;')
 	container.appendChild(counterBox);
 }
 
 function appendQuestionPane(container) {
 	var question = document.createElement('div');
 	question.setAttribute('id', 'question');
+	question.setAttribute('style', 'margin: 20px;')
+
 	var textbox = document.createElement('input');
 	textbox.setAttribute('type', 'text');
 	textbox.setAttribute('name', 'reason');
