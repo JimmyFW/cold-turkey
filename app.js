@@ -1,7 +1,19 @@
 chrome.runtime.sendMessage({requestFreedom: true}, function(res) {
 	freedom = res.freedom;
 	blockIfFree();
+	fetchVisits();
 });
+
+function fetchVisits() {
+	chrome.runtime.sendMessage({requestVisits: true}, function(res) {
+		console.log(res);
+		var counterBox = document.getElementById('turkey-counter');
+		if (counterBox != null) {
+			var counterMetric = document.createTextNode("You've visited YouTube " + res.visits.length + " times today.");
+			counterBox.appendChild(counterMetric);
+		}
+	});
+}
 
 document.getElementById('content').addEventListener('DOMSubtreeModified', blockOnDebouncedDOMEvents);
 
@@ -64,6 +76,13 @@ function blockAndDisplay() {
 		}
 	}
 
+	var maybeCounter = document.getElementById('turkey-counter');
+	if (maybeCounter == null) {
+		var counterBox = document.createElement('div');
+		counterBox.setAttribute('id', 'turkey-counter');
+		container.appendChild(counterBox);
+	}
+
 	// add the question pane if it hasn't been added yet
 	var maybeQuestion = document.getElementById('question');
 	if (maybeQuestion == null) {
@@ -73,9 +92,10 @@ function blockAndDisplay() {
 		textbox.setAttribute('type', 'text');
 		textbox.setAttribute('name', 'reason');
 		textbox.onkeypress = submitReason;
-		var questionText = document.createTextNode("Why did you come to YouTube?  ");
+		var questionText = document.createTextNode("Why are you on YouTube?");
 		question.appendChild(questionText);
 		question.appendChild(textbox);
+
 		container.appendChild(question);
 	}
 
