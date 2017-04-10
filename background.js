@@ -1,6 +1,9 @@
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-	if (request.requestFreedom) {
-		sendResponse({freedom: localStorage.getItem("freedom")});
+	if (request.requestSettings) {
+		sendResponse({
+			freedom: localStorage.getItem("freedom"),
+			distractions: localStorage.getItem("distractions")
+		});
 	} else if (request.requestVisits) {
 		chrome.history.getVisits({url:"https://www.youtube.com"}, function(results) {
 			var visitsToday = [];

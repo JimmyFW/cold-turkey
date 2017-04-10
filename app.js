@@ -1,5 +1,6 @@
-chrome.runtime.sendMessage({requestFreedom: true}, function(res) {
+chrome.runtime.sendMessage({requestSettings: true}, function(res) {
 	freedom = res.freedom;
+	distractions = res.distractions;
 	blockIfFree();
 	fetchVisits();
 });
@@ -63,17 +64,30 @@ function submitReason(event) {
 	}
 }
 
+function removeNode(node, parent) {
+	if (node != null) {
+		if (node.parentNode == parent) {
+			parent.removeChild(node);
+		} else {
+			console.log(node.parentNode);
+		}
+	}
+}
+
 function blockAndDisplay() {
 	var container = document.getElementById('page');
 
-	// remove the content pane if it exists
-	var content = document.getElementById('content');
-	if (content != null) {
-		if (content.parentNode == container) {
-			container.removeChild(content);
-		} else {
-			console.log(content.parentNode);
-		}
+	if (distractions == "true") {
+		console.log("killing sidebar and discussion");
+		var watchMain = document.getElementById("watch7-main");
+		var watchSidebar = document.getElementById("watch7-sidebar");
+		var watchDiscussion = document.getElementById("watch-discussion");
+		removeNode(watchSidebar, watchMain);
+		removeNode(watchDiscussion, watchMain);
+	} else {
+		console.log("killing all content");
+		var content = document.getElementById('content');
+		removeNode(content, container);
 	}
 
 	// add the counter pane if it hasn't been added yet

@@ -1,36 +1,49 @@
-window.addEventListener("load", loadToggleSetting);
+window.addEventListener("load", loadSettings);
 
-function loadToggleSetting() {
-	toggle = document.getElementById("toggle");
-	toggle.onclick = setFreedom;
-	refresh();
+function loadSettings() {
+	configureToggleUI("toggle", "freedom");
+	configureToggleUI("toggleDistractions", "distractions");
 }
 
-function setFreedom() {
-		var freedom = localStorage.getItem("freedom");
-		console.log("setFreedom: localStorage freedom value is " + freedom);
-		if (freedom === null) {
-			console.log("setFreedom: freedom is null");
-			localStorage.setItem("freedom", toggle.checked);
-		} else if (freedom === "false") {
-			console.log("fredom is false: " + freedom);
-			localStorage.setItem("freedom", true);
-			refresh();
-		} else {
-			console.log("fredom is true: " + freedom);
-			localStorage.setItem("freedom", false);
-			refresh();
-		}
-	}
+function configureToggleUI(toggle, setting) {
+	var toggleUI = document.getElementById(toggle);
+	var toggleValue = localStorage.getItem(setting);
+	toggleUI.onclick = getSettingFunction(toggle, setting);
+	refresh(toggle, toggleValue);
+}
 
-function refresh() {
-	var freedom = localStorage.getItem("freedom");
-	console.log(freedom);
-	if (freedom === null) {
-		console.log("refresh: freedom is null")
-	} else if (freedom === "true") {
-		toggle.checked = true;
+function getSettingFunction(toggle, setting) {
+	var toggle = toggle;
+	var setting = setting;
+	return function() {
+		setSetting(toggle, setting);
+	}
+}
+
+function refresh(toggle, setTo) {
+	//var toggleValue = localStorage.getItem(setting);
+	var toggleUI = document.getElementById(toggle);
+	if (setTo === "true") {
+		toggleUI.checked = true;
 	} else {
-		toggle.checked = false;
+		toggleUI.checked = false;
+	}
+}
+
+function setSetting(toggle, setting) {
+	var settingValue = localStorage.getItem(setting);
+	var toggleUI = document.getElementById(toggle)
+	console.log("setSetting: localStorage " + setting + " value is " + settingValue);
+	if (settingValue === null) {
+		console.log("setting " + setting + " to toggle value " + toggleUI.checked);
+		localStorage.setItem(setting, toggleUI.checked);
+	} else if (settingValue === "false") {
+		console.log("settingValue is false: " + settingValue + ", setting to true");
+		localStorage.setItem(setting, true);
+		refresh(toggle, "true");
+	} else {
+		console.log("settingValue is true: " + settingValue + ", setting to false");
+		localStorage.setItem(setting, false);
+		refresh(toggle, "false");
 	}
 }
