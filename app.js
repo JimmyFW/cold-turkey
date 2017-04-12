@@ -8,10 +8,27 @@ chrome.runtime.sendMessage({requestSettings: true}, function(res) {
 function fetchVisits() {
 	chrome.runtime.sendMessage({requestVisits: true}, function(res) {
 		console.log(res);
+
 		var counterBox = document.getElementById('turkey-counter');
 		if (counterBox != null) {
 			var counterMetric = document.createTextNode("You've visited YouTube " + res.visits.length + " times today.");
 			counterBox.appendChild(counterMetric);
+		}
+
+		var graphsBox = document.getElementById('turkey-graphs');
+		if (graphsBox != null) {
+			var timeMetric = document.createTextNode("Your visits occurred at these times: ");
+			var timeList = document.createElement('ul');
+			for (var i = 0; i < res.visits.length; i++) {
+				var timePoint = document.createElement('li');
+				
+				timePoint.innerHTML = "";
+				timePoint.innerHTML += getTimeStringFromTimestamp(res.visits[i].visitTime);
+
+				timeList.appendChild(timePoint);
+			}
+			graphsBox.appendChild(timeMetric);
+			graphsBox.appendChild(timeList);
 		}
 	});
 }
@@ -136,6 +153,10 @@ function appendCounterPane(container) {
 	counterBox.setAttribute('id', 'turkey-counter');
 	counterBox.setAttribute('style', 'margin: 20px;')
 	container.appendChild(counterBox);
+	var graphsBox = document.createElement('div');
+	graphsBox.setAttribute('id', 'turkey-graphs');
+	graphsBox.setAttribute('style', 'margin: 20px;')
+	container.appendChild(graphsBox);
 }
 
 function appendQuestionPane(container) {
@@ -152,4 +173,25 @@ function appendQuestionPane(container) {
 	question.appendChild(textbox);
 
 	container.appendChild(question);
+}
+
+function getTimeStringFromTimestamp(timestamp) {
+	var date = new Date(timestamp);
+	var timeString = "";
+	var hours = date.getHours();
+	var ampm = " AM";
+	if (hours > 12) {
+		hours -= 12;
+		ampm = " PM";
+	}
+	var minutes = date.getMinutes() + "";
+	if (minutes.length === 1) {
+		minutes = "0" + minutes;
+	}
+
+	timeString += hours;
+	timeString += ":";
+	timeString += minutes;
+	timeString += ampm;
+	return timeString;
 }
