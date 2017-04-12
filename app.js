@@ -130,6 +130,16 @@ function blockAndDisplay() {
 		removeNode(content);
 	}
 
+	// remove creative if it exists
+	var creative = document.getElementById("ad_creative_1");
+	removeNode(creative);
+
+	// remove appnav bar
+	var appnav = document.getElementById("masthead-appbar-container");
+	removeNode(appnav);
+	var mastheadPositioner = document.getElementById("masthead-positioner-height-offset");
+	mastheadPositioner.setAttribute("style", "height: 40px;");
+
 	// add the counter pane if it hasn't been added yet
 	var maybeCounter = document.getElementById('turkey-counter');
 	if (maybeCounter == null) {
