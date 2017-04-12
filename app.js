@@ -74,20 +74,43 @@ function removeNode(node, parent) {
 	}
 }
 
+function removeNode(node) {
+	if (node != null) {
+		var parent = node.parentNode;
+		if (parent != null) {
+			node.parentNode.removeChild(node);
+		} else {
+			console.log("Node's parent is null.");
+		}
+	} else {
+		console.log("Node is null.");
+	}
+}
+
 function blockAndDisplay() {
 	var container = document.getElementById('page');
 
 	if (distractions == "true") {
+		// modify player page
 		console.log("killing sidebar and discussion");
 		var watchMain = document.getElementById("watch7-main");
 		var watchSidebar = document.getElementById("watch7-sidebar");
 		var watchDiscussion = document.getElementById("watch-discussion");
-		removeNode(watchSidebar, watchMain);
-		removeNode(watchDiscussion, watchMain);
+		removeNode(watchSidebar);
+		removeNode(watchDiscussion);
+
+		// modify home page
+		//var feed = document.getElementById("feed");
+		var feedMain = document.getElementById("feed-main-what_to_watch");
+		removeNode(feedMain);
+
+		// modify trending page
+		var browseItems = document.getElementById("browse-items-primary");
+		removeNode(browseItems);
 	} else {
 		console.log("killing all content");
 		var content = document.getElementById('content');
-		removeNode(content, container);
+		removeNode(content);
 	}
 
 	// add the counter pane if it hasn't been added yet
