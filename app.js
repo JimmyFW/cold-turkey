@@ -17,18 +17,17 @@ function fetchVisits() {
 
 		var graphsBox = document.getElementById('turkey-graphs');
 		if (graphsBox != null) {
-			var timeMetric = document.createTextNode("Your visits occurred at these times: ");
-			var timeList = document.createElement('ul');
+			var timeList = [];
 			for (var i = 0; i < res.visits.length; i++) {
-				var timePoint = document.createElement('li');
-				
-				timePoint.innerHTML = "";
-				timePoint.innerHTML += getTimeStringFromTimestamp(res.visits[i].visitTime);
-
-				timeList.appendChild(timePoint);
+				var time = getTimeStringFromTimestamp(res.visits[i].visitTime);
+				if (timeList.length === 0) {
+					timeList.push(time);
+				} else if (timeList.length > 0 && time != timeList[timeList.length-1]) {
+					timeList.push(time);
+				}
 			}
+			var timeMetric = document.createTextNode("Your visits occurred at these times: " + timeList.join(", "));
 			graphsBox.appendChild(timeMetric);
-			graphsBox.appendChild(timeList);
 		}
 	});
 }
