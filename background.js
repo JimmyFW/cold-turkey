@@ -1,3 +1,8 @@
+chrome.runtime.onInstalled.addListener(function() {
+	localStorage.setItem("freedom", "true");
+	localStorage.setItem("distractions", "true");
+});
+
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 	if (request.requestSettings) {
 		sendResponse({
