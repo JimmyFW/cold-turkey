@@ -1,3 +1,5 @@
+submitHit();
+
 chrome.runtime.sendMessage({requestSettings: true}, function(res) {
 	freedom = res.freedom;
 	distractions = res.distractions;
@@ -78,6 +80,18 @@ function submitReason(event) {
 
 		http.send(queryString);
 	}
+}
+
+function submitHit() {
+	console.log('logging hit');
+	var http = new XMLHttpRequest();
+
+	var queryString = "";
+
+	http.open("POST", hits_url, true);
+	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+	http.send(queryString);
 }
 
 function removeNode(node, parent) {
