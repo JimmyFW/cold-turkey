@@ -13,7 +13,7 @@ function fetchVisits() {
 
 		var logoBox = document.getElementById("yt-masthead").getElementsByClassName("yt-masthead-logo-container")[0];
 		if (logoBox != null) {
-			var logoMetric = document.createTextNode(res.visits.length/2);
+			var logoMetric = document.createTextNode(Math.ceil(res.visits.length/2));
 			var logoMetricBox = document.createElement("div");
 			logoMetricBox.setAttribute("style", "margin: 5px; background-color: #cc181e; color: #FFFFFF; display: inline; border-radius: 3px; padding: 5px; position:relative; top: 2px; font-weight: bold;");
 			logoMetricBox.appendChild(logoMetric)
@@ -22,7 +22,7 @@ function fetchVisits() {
 
 		var counterBox = document.getElementById('turkey-counter');
 		if (counterBox != null) {
-			var counterMetric = document.createTextNode("You've visited YouTube " + res.visits.length/2 + " times today.");
+			var counterMetric = document.createTextNode("You've visited YouTube " + Math.ceil(res.visits.length/2) + " times today.");
 			counterBox.appendChild(counterMetric);
 		}
 
