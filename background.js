@@ -24,5 +24,22 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 			sendResponse({visits: visitsToday});
 		});
 		return true;
+	} else if (request.logSearchTerm) {
+		submitReason(request.reason);
 	}
 });
+
+function submitReason(reason) {
+	console.log('submit reason ' + reason);
+	var http = new XMLHttpRequest();
+
+	var queryString = "";
+	queryString += "reason=" + reason;
+
+	http.open("POST", url, true);
+	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+	console.log(queryString);
+
+	http.send(queryString);
+}

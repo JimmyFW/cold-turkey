@@ -5,7 +5,18 @@ chrome.runtime.sendMessage({requestSettings: true}, function(res) {
 	distractions = res.distractions;
 	blockIfFree();
 	fetchVisits();
+	attachSearchLogger();
 });
+
+function attachSearchLogger() {
+	var searchBox = document.getElementById("masthead-search-term");
+	if (searchBox === null) {
+		console.log("Could not attach");
+	} else {
+		console.log("Attaching");
+		searchBox.onkeydown = submitReason;
+	}
+}
 
 function fetchVisits() {
 	chrome.runtime.sendMessage({requestVisits: true}, function(res) {
@@ -27,16 +38,18 @@ function fetchVisits() {
 		}
 
 		var graphsBox = document.getElementById('turkey-graphs');
-		if (graphsBox != null) {
-			var timeList = [];
-			for (var i = 0; i < res.visits.length; i++) {
-				var time = getTimeStringFromTimestamp(res.visits[i].visitTime);
-				if (timeList.length === 0) {
-					timeList.push(time);
-				} else if (timeList.length > 0 && time != timeList[timeList.length-1]) {
-					timeList.push(time);
-				}
+
+		var timeList = [];
+		for (var i = 0; i < res.visits.length; i++) {
+			var time = getTimeStringFromTimestamp(res.visits[i].visitTime);
+			if (timeList.length === 0) {
+				timeList.push(time);
+			} else if (timeList.length > 0 && time != timeList[timeList.length-1]) {
+				timeList.push(time);
 			}
+		}
+
+		if (graphsBox != null) {
 			var timeMetric = document.createTextNode("Your visits occurred at these times: " + timeList.join(", "));
 			graphsBox.appendChild(timeMetric);
 		}
@@ -74,20 +87,11 @@ function blockIfFree() {
 }
 
 function submitReason(event) {
+	console.log(this.value);
 	if (event.keyCode == 13) {
-		console.log('submit reason ' + event.keyCode);
-		console.log(this.value);
-		var http = new XMLHttpRequest();
-
-		var queryString = "";
-		queryString += "reason=" + this.value;
-
-		http.open("POST", url, true);
-		http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-		console.log(queryString);
-
-		http.send(queryString);
+		chrome.runtime.sendMessage({logSearchTerm: true, reason: this.value}, function(res) {
+			console.log("Success? " + res);
+		});
 	}
 }
 
